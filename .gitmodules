@@ -1,0 +1,3 @@
+[submodule "frontend/res/forest-ttk"]
+	path = frontend/res/forest-ttk
+	url = https://github.com/rdbende/Forest-ttk-theme.git
