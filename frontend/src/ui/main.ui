@@ -1,0 +1,755 @@
+<?xml version='1.0' encoding='utf-8'?>
+<interface version="1.3">
+  <object class="tk.Toplevel" id="toplevel1">
+    <property name="geometry">1024x576</property>
+    <property name="relief">flat</property>
+    <property name="resizable">none</property>
+    <property name="title" translatable="yes">Fluke 8000A Datagrabber</property>
+    <bind sequence="&lt;Destroy&gt;" handler="on_quit" add="" />
+    <child>
+      <object class="ttk.Panedwindow" id="panedwindow1">
+        <property name="height">200</property>
+        <property name="orient">horizontal</property>
+        <property name="width">200</property>
+        <layout manager="pack">
+          <property name="expand">true</property>
+          <property name="fill">both</property>
+          <property name="side">top</property>
+        </layout>
+        <child>
+          <object class="ttk.Panedwindow.Pane" id="pane1">
+            <property name="weight">1</property>
+            <child>
+              <object class="ttk.Notebook" id="settings" named="True">
+                <property name="height">0</property>
+                <property name="padding">5</property>
+                <property name="takefocus">true</property>
+                <property name="width">150</property>
+                <layout manager="place">
+                  <property name="anchor">w</property>
+                  <property name="bordermode">outside</property>
+                  <property name="relwidth">0.0</property>
+                  <property name="relx">0.0</property>
+                  <property name="width">50</property>
+                  <property name="x">50</property>
+                  <property name="y">0</property>
+                </layout>
+                <child>
+                  <object class="ttk.Notebook.Tab" id="tab1">
+                    <property name="text" translatable="yes">Connection</property>
+                    <child>
+                      <object class="ttk.Frame" id="frame1">
+                        <property name="height">200</property>
+                        <property name="padding">5</property>
+                        <property name="width">50</property>
+                        <layout manager="pack">
+                          <property name="anchor">w</property>
+                          <property name="expand">false</property>
+                          <property name="padx">10</property>
+                          <property name="side">top</property>
+                        </layout>
+                        <containerlayout manager="pack">
+                          <property name="propagate">false</property>
+                        </containerlayout>
+                        <child>
+                          <object class="ttk.Label" id="label19">
+                            <property name="text" translatable="yes">Serial settings</property>
+                            <layout manager="pack">
+                              <property name="anchor">center</property>
+                              <property name="pady">5</property>
+                              <property name="side">top</property>
+                            </layout>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="ttk.Separator" id="separator1">
+                            <property name="orient">horizontal</property>
+                            <layout manager="pack">
+                              <property name="fill">x</property>
+                              <property name="pady">5</property>
+                              <property name="side">top</property>
+                            </layout>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="ttk.Frame" id="frame5">
+                            <property name="height">200</property>
+                            <property name="width">200</property>
+                            <layout manager="pack">
+                              <property name="anchor">center</property>
+                              <property name="expand">true</property>
+                              <property name="fill">x</property>
+                              <property name="side">top</property>
+                            </layout>
+                            <child>
+                              <object class="ttk.Label" id="label17">
+                                <property name="text" translatable="yes">Port</property>
+                                <layout manager="pack">
+                                  <property name="side">top</property>
+                                </layout>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="ttk.Combobox" id="serPorts" named="True">
+                                <property name="textvariable">string:serPort</property>
+                                <layout manager="pack">
+                                  <property name="fill">x</property>
+                                  <property name="padx">10</property>
+                                  <property name="pady">5</property>
+                                  <property name="side">top</property>
+                                </layout>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="ttk.Label" id="label18">
+                                <property name="text" translatable="yes">Baudrate</property>
+                                <layout manager="pack">
+                                  <property name="side">top</property>
+                                </layout>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="ttk.Combobox" id="combobox2">
+                                <property name="textvariable">int:serSpeed</property>
+                                <property name="values">4800 9600 14400 19200 38400 57600 115200</property>
+                                <layout manager="pack">
+                                  <property name="fill">x</property>
+                                  <property name="padx">10</property>
+                                  <property name="pady">5</property>
+                                  <property name="side">top</property>
+                                </layout>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="ttk.Button" id="btnSerCon" named="True">
+                                <property name="command" type="command" cbtype="with_wid">serialCtl</property>
+                                <property name="style">Accent.TButton</property>
+                                <property name="text" translatable="yes">Connect</property>
+                                <layout manager="pack">
+                                  <property name="fill">x</property>
+                                  <property name="padx">10</property>
+                                  <property name="pady">5</property>
+                                  <property name="side">top</property>
+                                </layout>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="ttk.Button" id="btnSerRefr" named="True">
+                                <property name="command" type="command" cbtype="simple">serialRefresh</property>
+                                <property name="text" translatable="yes">Refresh ports</property>
+                                <layout manager="pack">
+                                  <property name="fill">x</property>
+                                  <property name="padx">10</property>
+                                  <property name="pady">5</property>
+                                  <property name="side">top</property>
+                                </layout>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="ttk.Notebook.Tab" id="log" named="True">
+                    <property name="text" translatable="yes">Log</property>
+                    <child>
+                      <object class="ttk.Frame" id="frame3">
+                        <property name="height">200</property>
+                        <property name="padding">5</property>
+                        <property name="width">050</property>
+                        <layout manager="pack">
+                          <property name="padx">10</property>
+                          <property name="side">top</property>
+                        </layout>
+                        <child>
+                          <object class="ttk.Label" id="label16">
+                            <property name="justify">center</property>
+                            <property name="text" translatable="yes">Log settings</property>
+                            <layout manager="pack">
+                              <property name="anchor">center</property>
+                              <property name="pady">5</property>
+                              <property name="side">top</property>
+                            </layout>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="ttk.Separator" id="separator3">
+                            <property name="orient">horizontal</property>
+                            <layout manager="pack">
+                              <property name="fill">x</property>
+                              <property name="pady">5</property>
+                              <property name="side">top</property>
+                            </layout>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="ttk.Frame" id="frame6">
+                            <property name="height">200</property>
+                            <property name="width">200</property>
+                            <layout manager="pack">
+                              <property name="expand">true</property>
+                              <property name="fill">x</property>
+                              <property name="side">top</property>
+                            </layout>
+                            <child>
+                              <object class="ttk.Label" id="label24">
+                                <property name="text" translatable="yes">Location</property>
+                                <layout manager="pack">
+                                  <property name="side">top</property>
+                                </layout>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="pygubu.builder.widgets.pathchooserinput" id="pathchooserinput1">
+                                <property name="mustexist">true</property>
+                                <property name="type">file</property>
+                                <layout manager="pack">
+                                  <property name="fill">x</property>
+                                  <property name="padx">10</property>
+                                  <property name="pady">5</property>
+                                  <property name="side">top</property>
+                                </layout>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="ttk.Button" id="button14">
+                                <property name="style">Accent.TButton</property>
+                                <property name="text" translatable="yes">Start</property>
+                                <layout manager="pack">
+                                  <property name="fill">x</property>
+                                  <property name="padx">10</property>
+                                  <property name="pady">5</property>
+                                  <property name="side">top</property>
+                                </layout>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="ttk.Notebook.Tab" id="about" named="True">
+                    <property name="text" translatable="yes">About</property>
+                    <child>
+                      <object class="ttk.Frame" id="frame4">
+                        <property name="height">200</property>
+                        <property name="padding">5</property>
+                        <property name="width">50</property>
+                        <layout manager="pack">
+                          <property name="anchor">center</property>
+                          <property name="side">top</property>
+                        </layout>
+                        <child>
+                          <object class="ttk.Label" id="label15">
+                            <property name="anchor">center</property>
+                            <property name="justify">center</property>
+                            <property name="text" translatable="yes">Fluke 8000A Datagrabber</property>
+                            <layout manager="pack">
+                              <property name="anchor">center</property>
+                              <property name="expand">false</property>
+                              <property name="pady">5</property>
+                              <property name="side">top</property>
+                            </layout>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="ttk.Separator" id="separator5">
+                            <property name="orient">horizontal</property>
+                            <layout manager="pack">
+                              <property name="fill">x</property>
+                              <property name="pady">5</property>
+                              <property name="side">top</property>
+                            </layout>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="ttk.Frame" id="frame7">
+                            <property name="height">200</property>
+                            <property name="width">200</property>
+                            <layout manager="pack">
+                              <property name="expand">true</property>
+                              <property name="fill">x</property>
+                              <property name="side">top</property>
+                            </layout>
+                            <child>
+                              <object class="ttk.Label" id="label23">
+                                <property name="justify">center</property>
+                                <property name="text" translatable="yes">Arne van Iterson, 2023
+
+This software is licensed under the GPLv3.</property>
+                                <property name="wraplength">150</property>
+                                <layout manager="pack">
+                                  <property name="anchor">center</property>
+                                  <property name="expand">false</property>
+                                  <property name="pady">10</property>
+                                  <property name="side">top</property>
+                                </layout>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="ttk.Button" id="btnGithub" named="True">
+                                <property name="command" type="command" cbtype="with_wid">openLink</property>
+                                <property name="text" translatable="yes">Go to GitHub Project</property>
+                                <layout manager="pack">
+                                  <property name="fill">x</property>
+                                  <property name="padx">10</property>
+                                  <property name="side">top</property>
+                                </layout>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="ttk.Button" id="btnArnweb" named="True">
+                                <property name="command" type="command" cbtype="with_wid">openLink</property>
+                                <property name="text" translatable="yes">Go to ARNweb.nl</property>
+                                <layout manager="pack">
+                                  <property name="fill">x</property>
+                                  <property name="padx">10</property>
+                                  <property name="pady">5</property>
+                                  <property name="side">top</property>
+                                </layout>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Panedwindow.Pane" id="pane2">
+            <property name="weight">8</property>
+            <child>
+              <object class="ttk.Frame" id="controls" named="True">
+                <property name="height">200</property>
+                <property name="padding">20</property>
+                <property name="style">F8000A.TFrame</property>
+                <property name="width">200</property>
+                <layout manager="pack">
+                  <property name="expand">true</property>
+                  <property name="fill">both</property>
+                  <property name="side">top</property>
+                </layout>
+                <child>
+                  <object class="ttk.Frame" id="frame2">
+                    <property name="height">200</property>
+                    <property name="width">200</property>
+                    <layout manager="pack">
+                      <property name="expand">true</property>
+                      <property name="side">top</property>
+                    </layout>
+                    <child>
+                      <object class="ttk.Frame" id="display" named="True">
+                        <property name="height">200</property>
+                        <property name="style">F8000A.Display.TFrame</property>
+                        <property name="width">200</property>
+                        <layout manager="pack">
+                          <property name="expand">true</property>
+                          <property name="fill">both</property>
+                          <property name="ipadx">0</property>
+                          <property name="ipady">0</property>
+                          <property name="padx">0</property>
+                          <property name="pady">20</property>
+                          <property name="side">top</property>
+                        </layout>
+                        <child>
+                          <object class="tk.Canvas" id="displaycanvas" named="True">
+                            <property name="height">100</property>
+                            <property name="relief">raised</property>
+                            <property name="selectbackground">#000000</property>
+                            <property name="state">normal</property>
+                            <property name="takefocus">false</property>
+                            <layout manager="pack">
+                              <property name="anchor">center</property>
+                              <property name="expand">true</property>
+                              <property name="fill">x</property>
+                              <property name="padx">0</property>
+                              <property name="pady">0</property>
+                              <property name="side">top</property>
+                            </layout>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="ttk.Frame" id="mode" named="True">
+                        <property name="style">F8000A.TFrame</property>
+                        <layout manager="pack">
+                          <property name="expand">false</property>
+                          <property name="side">top</property>
+                        </layout>
+                        <child>
+                          <object class="ttk.Labelframe" id="function" named="True">
+                            <property name="borderwidth">2</property>
+                            <property name="labelanchor">n</property>
+                            <property name="relief">groove</property>
+                            <property name="style">F8000A.TFrame</property>
+                            <property name="text" translatable="yes">Function</property>
+                            <layout manager="pack">
+                              <property name="anchor">center</property>
+                              <property name="expand">true</property>
+                              <property name="fill">y</property>
+                              <property name="ipadx">5</property>
+                              <property name="side">left</property>
+                            </layout>
+                            <containerlayout manager="grid">
+                              <property name="anchor">s</property>
+                              <property type="col" id="0" name="uniform">1</property>
+                              <property type="col" id="all" name="pad">8</property>
+                              <property type="col" id="all" name="uniform">1</property>
+                            </containerlayout>
+                            <child>
+                              <object class="ttk.Label" id="label1">
+                                <property name="text" translatable="yes">ACV</property>
+                                <layout manager="grid">
+                                  <property name="column">0</property>
+                                  <property name="row">0</property>
+                                  <property name="sticky">s</property>
+                                </layout>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="ttk.Button" id="func_acv" named="True">
+                                <property name="command" type="command" cbtype="with_wid">setFunc</property>
+                                <property name="style">F8000A.TButton</property>
+                                <property name="width">0</property>
+                                <layout manager="grid">
+                                  <property name="column">0</property>
+                                  <property name="ipadx">0</property>
+                                  <property name="ipady">9</property>
+                                  <property name="pady">5</property>
+                                  <property name="row">1</property>
+                                </layout>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="ttk.Label" id="label2">
+                                <property name="text" translatable="yes">AC MA</property>
+                                <layout manager="grid">
+                                  <property name="column">1</property>
+                                  <property name="row">0</property>
+                                  <property name="sticky">s</property>
+                                </layout>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="ttk.Button" id="func_acma" named="True">
+                                <property name="command" type="command" cbtype="with_wid">setFunc</property>
+                                <property name="style">F8000A.TButton</property>
+                                <property name="width">0</property>
+                                <layout manager="grid">
+                                  <property name="column">1</property>
+                                  <property name="ipadx">0</property>
+                                  <property name="ipady">9</property>
+                                  <property name="pady">5</property>
+                                  <property name="row">1</property>
+                                </layout>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="ttk.Label" id="label3">
+                                <property name="text" translatable="yes">DCV</property>
+                                <layout manager="grid">
+                                  <property name="column">2</property>
+                                  <property name="row">0</property>
+                                  <property name="sticky">s</property>
+                                </layout>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="ttk.Button" id="func_dcv" named="True">
+                                <property name="command" type="command" cbtype="with_wid">setFunc</property>
+                                <property name="style">F8000A.TButton</property>
+                                <property name="width">0</property>
+                                <layout manager="grid">
+                                  <property name="column">2</property>
+                                  <property name="ipadx">0</property>
+                                  <property name="ipady">9</property>
+                                  <property name="pady">5</property>
+                                  <property name="row">1</property>
+                                </layout>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="ttk.Label" id="label4">
+                                <property name="text" translatable="yes">DC MA</property>
+                                <layout manager="grid">
+                                  <property name="column">3</property>
+                                  <property name="row">0</property>
+                                  <property name="sticky">s</property>
+                                </layout>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="ttk.Button" id="func_dcma" named="True">
+                                <property name="command" type="command" cbtype="with_wid">setFunc</property>
+                                <property name="style">F8000A.TButton</property>
+                                <property name="width">0</property>
+                                <layout manager="grid">
+                                  <property name="column">3</property>
+                                  <property name="ipadx">0</property>
+                                  <property name="ipady">9</property>
+                                  <property name="pady">5</property>
+                                  <property name="row">1</property>
+                                </layout>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="ttk.Label" id="label5">
+                                <property name="text" translatable="yes">KΩ</property>
+                                <layout manager="grid">
+                                  <property name="column">4</property>
+                                  <property name="row">0</property>
+                                  <property name="sticky">s</property>
+                                </layout>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="ttk.Button" id="func_kohm" named="True">
+                                <property name="command" type="command" cbtype="with_wid">setFunc</property>
+                                <property name="style">F8000A.TButton</property>
+                                <property name="width">0</property>
+                                <layout manager="grid">
+                                  <property name="column">4</property>
+                                  <property name="ipadx">0</property>
+                                  <property name="ipady">9</property>
+                                  <property name="pady">5</property>
+                                  <property name="row">1</property>
+                                </layout>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="ttk.Label" id="label6">
+                                <property name="text" translatable="yes">20 MΩ</property>
+                                <layout manager="grid">
+                                  <property name="column">5</property>
+                                  <property name="row">0</property>
+                                  <property name="sticky">s</property>
+                                </layout>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="ttk.Button" id="func_mohm" named="True">
+                                <property name="command" type="command" cbtype="with_wid">setFunc</property>
+                                <property name="style">F8000A.TButton</property>
+                                <property name="width">0</property>
+                                <layout manager="grid">
+                                  <property name="column">5</property>
+                                  <property name="ipadx">0</property>
+                                  <property name="ipady">9</property>
+                                  <property name="pady">5</property>
+                                  <property name="row">1</property>
+                                </layout>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="ttk.Labelframe" id="range" named="True">
+                            <property name="borderwidth">2</property>
+                            <property name="labelanchor">n</property>
+                            <property name="relief">groove</property>
+                            <property name="style">F8000A.TFrame</property>
+                            <property name="text" translatable="yes">Range</property>
+                            <layout manager="pack">
+                              <property name="anchor">s</property>
+                              <property name="expand">true</property>
+                              <property name="fill">y</property>
+                              <property name="ipadx">5</property>
+                              <property name="padx">5</property>
+                              <property name="side">left</property>
+                            </layout>
+                            <containerlayout manager="grid">
+                              <property name="anchor">center</property>
+                              <property type="col" id="all" name="minsize">1</property>
+                              <property type="col" id="all" name="uniform">1</property>
+                            </containerlayout>
+                            <child>
+                              <object class="ttk.Label" id="label8">
+                                <property name="text" translatable="yes">200MV
+200μA
+200Ω</property>
+                                <layout manager="grid">
+                                  <property name="column">0</property>
+                                  <property name="row">0</property>
+                                  <property name="sticky">s</property>
+                                </layout>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="ttk.Button" id="rng_0_2" named="True">
+                                <property name="command" type="command" cbtype="with_wid">setRange</property>
+                                <property name="style">F8000A.TButton</property>
+                                <property name="width">0</property>
+                                <layout manager="grid">
+                                  <property name="column">0</property>
+                                  <property name="ipadx">0</property>
+                                  <property name="ipady">9</property>
+                                  <property name="pady">5</property>
+                                  <property name="row">1</property>
+                                </layout>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="ttk.Label" id="label9">
+                                <property name="text" translatable="yes">2</property>
+                                <layout manager="grid">
+                                  <property name="column">1</property>
+                                  <property name="row">0</property>
+                                  <property name="sticky">s</property>
+                                </layout>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="ttk.Button" id="rng_2" named="True">
+                                <property name="command" type="command" cbtype="with_wid">setRange</property>
+                                <property name="style">F8000A.TButton</property>
+                                <property name="width">0</property>
+                                <layout manager="grid">
+                                  <property name="column">1</property>
+                                  <property name="ipadx">0</property>
+                                  <property name="ipady">9</property>
+                                  <property name="pady">5</property>
+                                  <property name="row">1</property>
+                                </layout>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="ttk.Label" id="label10">
+                                <property name="text" translatable="yes">20</property>
+                                <layout manager="grid">
+                                  <property name="column">2</property>
+                                  <property name="row">0</property>
+                                  <property name="sticky">s</property>
+                                </layout>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="ttk.Button" id="rng_20" named="True">
+                                <property name="command" type="command" cbtype="with_wid">setRange</property>
+                                <property name="style">F8000A.TButton</property>
+                                <property name="width">0</property>
+                                <layout manager="grid">
+                                  <property name="column">2</property>
+                                  <property name="ipadx">0</property>
+                                  <property name="ipady">9</property>
+                                  <property name="pady">5</property>
+                                  <property name="row">1</property>
+                                </layout>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="ttk.Label" id="label11">
+                                <property name="text" translatable="yes">200</property>
+                                <layout manager="grid">
+                                  <property name="column">3</property>
+                                  <property name="row">0</property>
+                                  <property name="sticky">s</property>
+                                </layout>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="ttk.Button" id="rng_200" named="True">
+                                <property name="command" type="command" cbtype="with_wid">setRange</property>
+                                <property name="style">F8000A.TButton</property>
+                                <property name="width">0</property>
+                                <layout manager="grid">
+                                  <property name="column">3</property>
+                                  <property name="ipadx">0</property>
+                                  <property name="ipady">9</property>
+                                  <property name="pady">5</property>
+                                  <property name="row">1</property>
+                                </layout>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="ttk.Label" id="label12">
+                                <property name="text" translatable="yes">1200 V
+2000 MA
+2000 KΩ</property>
+                                <layout manager="grid">
+                                  <property name="column">4</property>
+                                  <property name="row">0</property>
+                                  <property name="sticky">s</property>
+                                </layout>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="ttk.Button" id="rng_2000" named="True">
+                                <property name="command" type="command" cbtype="with_wid">setRange</property>
+                                <property name="style">F8000A.TButton</property>
+                                <property name="width">0</property>
+                                <layout manager="grid">
+                                  <property name="column">4</property>
+                                  <property name="ipadx">0</property>
+                                  <property name="ipady">9</property>
+                                  <property name="pady">5</property>
+                                  <property name="row">1</property>
+                                </layout>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="ttk.Labelframe" id="power" named="True">
+                            <property name="borderwidth">2</property>
+                            <property name="labelanchor">n</property>
+                            <property name="relief">groove</property>
+                            <property name="style">F8000A.TFrame</property>
+                            <property name="text" translatable="yes">Power</property>
+                            <layout manager="pack">
+                              <property name="anchor">center</property>
+                              <property name="expand">true</property>
+                              <property name="fill">y</property>
+                              <property name="ipadx">5</property>
+                              <property name="ipady">0</property>
+                              <property name="side">left</property>
+                            </layout>
+                            <containerlayout manager="grid">
+                              <property name="anchor">s</property>
+                              <property type="col" id="all" name="pad">8</property>
+                            </containerlayout>
+                            <child>
+                              <object class="ttk.Button" id="pow_toggle" named="True">
+                                <property name="command" type="command" cbtype="with_wid">setPower</property>
+                                <property name="style">Accent.TButton</property>
+                                <property name="width">0</property>
+                                <layout manager="grid">
+                                  <property name="column">0</property>
+                                  <property name="ipadx">0</property>
+                                  <property name="ipady">9</property>
+                                  <property name="pady">5</property>
+                                  <property name="row">1</property>
+                                </layout>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="ttk.Label" id="label14">
+                                <property name="text" translatable="yes">ON-OFF</property>
+                                <layout manager="grid">
+                                  <property name="column">0</property>
+                                  <property name="row">0</property>
+                                </layout>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>
